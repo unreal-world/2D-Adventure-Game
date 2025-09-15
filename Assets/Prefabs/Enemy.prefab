@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8982648162023663120}
   - component: {fileID: 1552658769335228836}
   - component: {fileID: 1853825742036694385}
+  - component: {fileID: 3557237630624557407}
   - component: {fileID: 5322585608258125263}
   m_Layer: 0
   m_Name: Enemy
@@ -159,6 +160,27 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!95 &3557237630624557407
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7811007891056160892}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f18aabf2fdb34ce469599852191d07e6, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &5322585608258125263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -171,3 +193,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1404d5a57aa29a342b47e5124976c0b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  changeTime: 3
+  speed: 1
+  damage: 1
+  vertical: 1
+  isAdvanceEnemy: 0

@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
+    Animator animator;
     public float changeTime = 3.0f;
     float timer;
     int count = 0;
@@ -18,6 +19,7 @@ public class EnemyController : MonoBehaviour
     void Start()
     {
         rigidbody2d = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
         timer = changeTime;
     }
 
@@ -28,10 +30,14 @@ public class EnemyController : MonoBehaviour
         if (vertical)
         {
             position.y = position.y + speed * direction * Time.deltaTime;
+            animator.SetFloat("Move X", 0);
+            animator.SetFloat("Move Y", direction);
         }
         else
         {
             position.x = position.x + speed * direction * Time.deltaTime;
+            animator.SetFloat("Move X", direction);
+            animator.SetFloat("Move Y", 0);
         }
         rigidbody2d.MovePosition(position);
     }
@@ -46,12 +52,12 @@ public class EnemyController : MonoBehaviour
             if (isAdvanceEnemy)
             {
                 count++;
-                IsAdvanceEnemy();
+                AdvanceMoveEnemy();
             }
         }
     }
 
-    void IsAdvanceEnemy()
+    void AdvanceMoveEnemy()
     {
         if (count == 2)
         {
