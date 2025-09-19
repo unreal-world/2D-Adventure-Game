@@ -14,6 +14,8 @@ public class EnemyController : MonoBehaviour
     public int damage = 1;
     public bool vertical;
     public bool isAdvanceEnemy = false;
+
+    bool broken = true;
     Rigidbody2D rigidbody2d;
     // Start is called before the first frame update
     void Start()
@@ -40,6 +42,11 @@ public class EnemyController : MonoBehaviour
             animator.SetFloat("Move Y", 0);
         }
         rigidbody2d.MovePosition(position);
+
+        if (!broken)
+        {
+            return;
+        }
     }
 
     void Update()
@@ -71,8 +78,15 @@ public class EnemyController : MonoBehaviour
         PlayerController player = other.gameObject.GetComponent<PlayerController>();
         if (player != null)
         {
-           player.ChangeHealth(-damage);
+            player.ChangeHealth(-damage);
         }
+    }
+
+    public void Fix()
+    {
+        broken = false;
+        rigidbody2d.simulated = false;
+        animator.SetTrigger("Fixed");
     }
 
 }

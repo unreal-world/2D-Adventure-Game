@@ -7,8 +7,9 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    public InputAction talkAction;
     Animator animator;
-    Vector2 moveDirection = new Vector2(1,0);
+    Vector2 moveDirection = new Vector2(1, 0);
     public InputAction MoveAction;
     Rigidbody2D rigidbody2d;
     public int maxHealth = 5;
@@ -22,11 +23,15 @@ public class PlayerController : MonoBehaviour
     bool isInvincible;
     float damageCooldown;
 
+    public GameObject projectilePrefab;
+
     void Start()
     {
         MoveAction.Enable();
         rigidbody2d = GetComponent<Rigidbody2D>();
         currentHealth = maxHealth;
+
+        talkAction.Enable();
 
         animator = GetComponent<Animator>();
     }
@@ -34,6 +39,16 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         move = MoveAction.ReadValue<Vector2>();
+
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            Launch();
+        }
+
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+           FindFriend();
+        }
 
         if (isInvincible)
         {
@@ -75,6 +90,27 @@ public class PlayerController : MonoBehaviour
         animator.SetTrigger("Hit");
         currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
         UIHandler.instance.SetHealthValue(currentHealth / (float)maxHealth);
+    }
+
+    void Launch()
+    {
+        GameObject projectileObject = Instantiate(projectilePrefab, rigidbody2d.position + Vector2.up * 0.5f, Quaternion.identity);
+        Projectile projectile = projectileObject.GetComponent<Projectile>();
+        projectile.Launch(moveDirection, 300);
+        animator.SetTrigger("Launch");
+    }
+
+    void FindFriend()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(rigidbody2d.position + Vector2.up * 0.2f,  moveDirection, 1.5f, LayerMask.GetMask("NPC"));
+        if (hit.collider != null)
+        {
+            NonPlayerCharacter character = hit.collider.GetComponent<NonPlayerCharacter>();
+            if (character != null)
+            {
+                UIHandler.instance.DisplayDialogue();
+            }
+        }
     }
 
 }
