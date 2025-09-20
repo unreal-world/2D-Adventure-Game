@@ -98,6 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 530753a05b68b1f419032e4e0bb4a542, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collectedClip: {fileID: 8300000, guid: 173a14cf06354c643b46b235f2a4f974, type: 3}
   healthAmount: 2
 --- !u!61 &5875314891848283449
 BoxCollider2D:

@@ -165,3 +165,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8387b06bf7218a646a8ba1de01a76193, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dialogue: hi there!

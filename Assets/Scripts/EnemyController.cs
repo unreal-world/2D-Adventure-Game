@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
+    public ParticleSystem smokeEffect;
+    AudioSource audioSource;
     Animator animator;
     public float changeTime = 3.0f;
     float timer;
@@ -23,6 +25,8 @@ public class EnemyController : MonoBehaviour
         rigidbody2d = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         timer = changeTime;
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     void FixedUpdate()
@@ -87,6 +91,8 @@ public class EnemyController : MonoBehaviour
         broken = false;
         rigidbody2d.simulated = false;
         animator.SetTrigger("Fixed");
+        audioSource.Stop();
+        smokeEffect.Stop();
     }
 
 }

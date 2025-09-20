@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    AudioSource audioSource;
     public InputAction talkAction;
     Animator animator;
     Vector2 moveDirection = new Vector2(1, 0);
@@ -34,6 +35,8 @@ public class PlayerController : MonoBehaviour
         talkAction.Enable();
 
         animator = GetComponent<Animator>();
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -47,7 +50,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.X))
         {
-           FindFriend();
+            FindFriend();
         }
 
         if (isInvincible)
@@ -102,7 +105,7 @@ public class PlayerController : MonoBehaviour
 
     void FindFriend()
     {
-        RaycastHit2D hit = Physics2D.Raycast(rigidbody2d.position + Vector2.up * 0.2f,  moveDirection, 1.5f, LayerMask.GetMask("NPC"));
+        RaycastHit2D hit = Physics2D.Raycast(rigidbody2d.position + Vector2.up * 0.2f, moveDirection, 1.5f, LayerMask.GetMask("NPC"));
         if (hit.collider != null)
         {
             NonPlayerCharacter character = hit.collider.GetComponent<NonPlayerCharacter>();
@@ -111,6 +114,11 @@ public class PlayerController : MonoBehaviour
                 UIHandler.instance.DisplayDialogue();
             }
         }
+    }
+    
+    public void PlaySound(AudioClip clip)
+    {
+        audioSource.PlayOneShot(clip);
     }
 
 }
